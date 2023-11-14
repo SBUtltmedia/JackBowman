@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+  <style>
+
+video::cue {
+  font-size: 4rem;
+  color: yellow;
+  background-color:white;
+  text-transform: capitalize;
+}
+
+  </style>
+  
+  <script>
+
+
+
+let myStart = function() {
+ 
+      let video = document.getElementById('video');
+    const track = video.textTracks[0] 
+    track.addEventListener('cuechange', onCueChange);
+    var event = new Event('cuechange', { bubbles: true, cancelable: false })
+    setTimeout(()=>track.dispatchEvent(event),200)
+    function onCueChange(event) {
+      console.log('testing onCueChange');
+      const cues = event.currentTarget.cues;
+      for (let i = 0; i < cues.length; i++) {
+        cues[i].line = 0
+      }       
+    }
+  }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <video  onloadstart="myStart()" id="video" width="50%" controls autoplay src="MindGym90.mp4">
+    <track default src="MindGym90.vtt" />
+  </video>
+  
+
+  
+</head>
+<body>
+  
+</body>
+</html>
